@@ -1,0 +1,17 @@
+<html ng-app>
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+   <script type="text/javascript">
+	var sampleApp = angular.module("mainModule",[]);
+
+   </script>
+</head>
+<body>
+	<div>
+		<input type="text" ng-model="name"><br/>
+		<br/>
+		My name is 
+		<span id="spanName">{{name}}</span>
+	</div>
+</body>
+</html>

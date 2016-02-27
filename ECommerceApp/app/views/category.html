@@ -1,1 +1,25 @@
-Category
+<br/>
+<div>
+    <div>
+        <button ng-click="ChangeSingleSelect()" ng-if="SingleSelect">Active MultiSelect</button>
+        <button ng-click="ChangeSingleSelect()" ng-if="!SingleSelect">Active SingleSelect</button>
+    </div>
+    <div>
+        <ul>
+            <li ng-repeat="category in Categories" ng-if="SingleSelect">
+                <a>{{category.categoryName}}
+                </a>
+            </li>
+
+            <li ng-repeat="category in Categories" ng-if="!SingleSelect">
+                <input ng-click="ShowStatus()" type="checkbox" ng-model="checkbox" />{{category.categoryName}}
+            </li>
+        </ul>
+    </div>
+    <div ng-if="!SingleSelect">
+        <button ng-click="GetSelectedCategories()">Show products on selecte categories</button>
+    </div>
+</div>
+
+
+
