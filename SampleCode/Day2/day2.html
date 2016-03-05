@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="main">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-
+    <script type="text/javascript">
+        var app  = angular.module('main',[]);
+        app.controller('mainCtrl',function($rootScope,$scope){
+            $scope.message = "Welcome";
+            $rootScope.day = "Saturday";
+        });
+        app.controller('secondCtrl',function($rootScope,$scope){
+            $scope.message = "Welcome2";
+        });
+        app.directive('firstDirective',function(){
+            return{
+                restrict : 'EAC',
+                scope : {
+                    name : '='
+                },
+                templateUrl: '../Day2/directiveView.html',
+                replace: true
+            }
+        });
+    </script>
     <meta charset="UTF-8">
     <title></title>
 </head>
-<body>
+<body >
+    <div ng-controller="mainCtrl">
+        {{message}} - {{day}}
+    </div>
+    
+    <div ng-controller="secondCtrl">
+        {{message}}- {{day}}
+    </div>
+    
+    <br/>
+    <br/>
+    //Element E
+    <first-directive name="'Element'"></first-directive>
+    
+    <br/>
+    <br/>
+    //Attribute A
+    <div first-directive name="'Attr'"></div>
+    
+    <br/>
+    <br/>
+    //Class C
+    <div class="first-directive" name="'Class'"></div>
+    
+    <br/>
+    <br/>
+    //Comment M 
+    <!-- directive: first-directive-->
+    
+
 
 </body>
 </html>
