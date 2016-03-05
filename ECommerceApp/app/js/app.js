@@ -1,5 +1,5 @@
 
-var eCommerceApp = angular.module('eCommerceApp',['ngRoute','app.controllers']);
+var eCommerceApp = angular.module('eCommerceApp',['ngRoute','app.controllers','app.services','app.directives']);
 
 
 eCommerceApp.config(['$routeProvider',
@@ -10,7 +10,8 @@ eCommerceApp.config(['$routeProvider',
         controller : 'HomeCtrl'
       }).
       when('/cart', {
-        templateUrl: 'views/cart.html'
+        templateUrl: 'views/cart.html',
+        controller: 'CardCtrl' 
       }).
       when('/contact', {
         templateUrl: 'views/contact.html'
@@ -22,8 +23,9 @@ eCommerceApp.config(['$routeProvider',
         templateUrl: 'views/category.html',
         controller :  'CategoryCtrl'
       }).
-      when('/productDetail', {
-        templateUrl: 'views/productDetail.html'
+      when('/productDetail/:productId', {
+        templateUrl: 'views/productDetail.html',
+        controller : 'ProductDetailCtrl'
       }).
       otherwise({
         redirectTo: '/home'

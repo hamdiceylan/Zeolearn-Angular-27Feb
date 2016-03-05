@@ -1,4 +1,4 @@
-    
+
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -19,10 +19,10 @@
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
-                        <form action="#">
+                        <div>
                             <input type="text" placeholder="Search products...">
                             <input type="submit" value="Search">
-                        </form>
+                        </div>
                     </div>
                     
                     <div class="single-sidebar">
@@ -72,7 +72,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <form method="post" action="#">
+                            <div>
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
@@ -85,21 +85,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart_item">
+                                        <tr class="cart_item" ng-repeat="card in cards">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="#">×</a> 
+                                                <a title="Remove this item" class="remove" href="#" ng-click="RemoveFromCard(card)">×</a> 
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
+                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" ng-src="{{card.image}}"></a>
                                             </td>
 
                                             <td class="product-name">
-                                                <a href="single-product.html">Ship Your Idea</a> 
+                                                <a href="single-product.html">{{card.name}}</a> 
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">£15.00</span> 
+                                                <span class="amount">{{card.currency}} {{card.newPrice}}</span> 
                                             </td>
 
                                             <td class="product-quantity">
@@ -111,7 +111,7 @@
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount">£15.00</span> 
+                                                <span class="amount">{{card.currency}} {{card.newPrice}}</span> 
                                             </td>
                                         </tr>
                                         <tr>
@@ -127,7 +127,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </form>
+                            </div>
 
                             <div class="cart-collaterals">
 
@@ -182,7 +182,7 @@
                             </div>
 
 
-                            <form method="post" action="#" class="shipping_calculator">
+                            <div method="post"  class="shipping_calculator">
                                 <h2><a class="shipping-calculator-button" data-toggle="collapse" href="#calcalute-shipping-wrap" aria-expanded="false" aria-controls="calcalute-shipping-wrap">Calculate Shipping</a></h2>
 
                                 <section id="calcalute-shipping-wrap" class="shipping-calculator-form collapse">
@@ -445,7 +445,7 @@
                                 <p><button class="button" value="1" name="calc_shipping" type="submit">Update Totals</button></p>
 
                                 </section>
-                            </form>
+                            </div>
 
 
                             </div>
@@ -455,3 +455,6 @@
             </div>
         </div>
     </div>
+
+
+<basket products="cards"></basket> 

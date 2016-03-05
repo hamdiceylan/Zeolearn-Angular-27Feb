@@ -1,58 +1,79 @@
 angular.module('app.controllers',[])
 
-.controller('HomeCtrl',function($scope){
-    $scope.name = "My Name";
+.controller('HomeCtrl',function($scope,$rootScope,cardService){
+  $scope.name = "My Name";
 
-    $scope.mainProducts = [
+  $rootScope.mainProducts = [
         {
+            id : '1',
             image : 'img/product-1.jpg',
             name : 'Samsung Galaxy s5',
-            oldPrice : '$1.000',
-            newPrice : '$700'
+            oldPrice : '1000',
+            newPrice : '700',
+            currency : '$'
         },
         {
+            id : '2',
             image : 'img/product-2.jpg',
             name : 'Nokia Lumia 1320',
-            oldPrice : '$1.200',
-            newPrice : '$950'
+            oldPrice : '1200',
+            newPrice : '950',
+            currency : '$'
         },
         {
+            id : '3',
             image : 'img/product-3.jpg',
             name : 'LG Leon 2015',
-            oldPrice : '$700',
-            newPrice : '$500'
+            oldPrice : '700',
+            newPrice : '500',
+            currency : '$'
         },
         {
+            id : '4',
             image : 'img/product-4.jpg',
             name : 'Sony microsoft',
-            oldPrice : '$1.100',
-            newPrice : '$900'
+            oldPrice : '1100',
+            newPrice : '900',
+            currency : '$'
         },
         {
+            id : '5',
             image : 'img/product-5.jpg',
             name : 'Iphone 6 Plus',
-            oldPrice : '$1.400',
-            newPrice : '$1.100'
+            oldPrice : '1400',
+            newPrice : '1100',
+            currency : '$'
         },
         {
+            id : '6',
             image : 'img/product-1.jpg',
             name : 'Samsung Galaxy s6',
-            oldPrice : '$900',
-            newPrice : '$500'
+            oldPrice : '900',
+            newPrice : '500',
+            currency : '$'
         },
         {
+            id : '7',
             image : 'img/product-2.jpg',
             name : 'Nokia',
-            oldPrice : '$800',
-            newPrice : '$700'
+            oldPrice : '800',
+            newPrice : '700',
+            currency : '$'
         },
         {
+            id : '10',
             image : 'img/product-3.jpg',
             name : 'LG G3 2015',
-            oldPrice : '$1.000',
-            newPrice : '$700'
+            oldPrice : '1000',
+            newPrice : '700',
+            currency : '$'
         }
     ];
+    
+  $scope.addToCard = function(product){
+      cardService.addToCard(product);
+  };
+   
     
 })
 
@@ -120,5 +141,25 @@ angular.module('app.controllers',[])
 
     }
 
- });
+ })
+
+.controller('ProductDetailCtrl',function($scope,$rootScope,$routeParams){
+    $scope.productId = $routeParams.productId;
+    
+    $rootScope.mainProducts.map(function(item){
+        if (item.id == $scope.productId){
+            $scope.selectedProduct = item;
+        }
+    });
+})
+
+.controller('CardCtrl',function($scope,$rootScope,cardService){
+    debugger;
+    $scope.cards = $rootScope.cardItems;
+    
+    $scope.RemoveFromCard = function(product){
+        cardService.RemoveFromCard(product);
+    };
+    
+});
 

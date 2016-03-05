@@ -84,7 +84,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="#cart">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="#cart">Cart - <span class="cart-amunt">{{currency}} {{totalAmount}}</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">{{cardItems.length}}</span></a>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,11 @@
     <script src="bower_components/angular/angular.js"></script>   
 
     <script src="js/app.js"></script>    
-    <script src="js/controllers.js"></script>
+    <script src="js/controllers.js"></script>    
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+
+      
 
     <script src="bower_components/angular-route/angular-route.js"></script>
    
