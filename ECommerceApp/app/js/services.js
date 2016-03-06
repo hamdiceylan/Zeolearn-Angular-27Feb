@@ -10,17 +10,15 @@ angular.module('app.services',[])
       $rootScope.totalAmount += parseInt(product.newPrice);
   }; 
   this.RemoveFromCard = function(product){
-      var arrayIndex = 0;
-      var removeObjectIndex = 0;
-      $rootScope.cardItems.map(function(item){
-          arrayIndex++;
-          if(item.id == product.id){
-              removeObjectIndex = arrayIndex;
-              $rootScope.totalAmount -= parseInt(item.newPrice);
-          }
-      });
-      
-      $rootScope.cardItems.splice(0,removeObjectIndex);
+      debugger;
+         var index = 0;
+         $rootScope.cardItems.map(function(item){
+             if(item.id == product.id)
+             {
+                 $rootScope.totalAmount -= parseInt(item.newPrice);
+                 console.log($rootScope.cardItems.splice(index,1)); 
+             }
+             index++;
+         });
   };
-    
 });
