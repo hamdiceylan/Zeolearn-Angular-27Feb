@@ -1,0 +1,28 @@
+<div style="margin-left:200px;">
+    Welcome to crud page
+
+<form>
+   <input type="text" ng-model="newProduct.id" Placeholder="Id"/> <br/>
+   <input type="text" ng-model="newProduct.image" Placeholder="image"/> <br/>
+   <input type="text" ng-model="newProduct.name" Placeholder="name"/> <br/>
+   <input type="text" ng-model="newProduct.oldPrice" Placeholder="oldPrice"/> <br/>
+   <input type="text" ng-model="newProduct.newPrice" Placeholder="newPrice"/> <br/>   
+   <input type="text" ng-model="newProduct.currency" Placeholder="currency"/> <br/>
+    
+    
+   <input type="button" value="Add Product" ng-click="AddProduct()" />
+
+
+</form>
+    <br/>
+    <table>
+        <tr ng-repeat="product in mainProducts">
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.newPrice}}</td>
+            <td><button ng-click="DeleteProduct(product)">Delete</button></td>
+        </tr>
+         
+    </table>
+    
+</div>

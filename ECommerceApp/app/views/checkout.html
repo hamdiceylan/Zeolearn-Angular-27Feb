@@ -1,3 +1,5 @@
+{{message}}
+
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
@@ -65,16 +67,33 @@
                                     <div class="woocommerce-billing-fields">
                                         <h3>Please fill below form to complete your shopping.</h3>
                                         <p class="form-row form-row-first validate-required">
-                                            <input type="text" name="ad" ng-model="Adi" class="input-text" required />
-                                            <div ng-messages="exampleForm.ad.$error" class="required">
-                                                <div ng-message="required">This field is required</div>
+                                            <label>Name :</label>
+                                            <input type="text" name="name" ng-model="form.name" class="input-text" required />
+                                            <div ng-messages="exampleForm.name.$error" class="required">
+                                                <div ng-message="required">Name field is required</div>
+                                            </div>
+                                        </p>
+                                    
+                                         <p class="form-row form-row-first validate-required">
+                                            <label>Address :</label>
+                                            <input type="text" name="address" ng-model="form.address" class="input-text" required />
+                                            <div ng-messages="exampleForm.address.$error" class="required">
+                                                <div ng-message="required">Address field is required</div>
+                                            </div>
+                                        </p>
+                                
+                                        <p class="form-row form-row-first validate-required">
+                                            <label>Post Code :</label>
+                                            <input type="text" name="postCode" ng-model="form.postCode" class="input-text" required />
+                                            <div ng-messages="exampleForm.postCode.$error" class="required">
+                                                <div ng-message="required">Postcode field is required</div>
                                             </div>
                                         </p>
                                         <p class="form-row form-row-wide address-field">
                                             <a href="#/cart">
                                                 <input type="submit" value="Goto Card">
                                             </a>
-                                            <input type="submit" value="Complete Shopping">
+                                            <input type="submit" value="Complete Shopping" ng-click="completeShopping()">
                                         </p>
                                     </div>
                                 </div>

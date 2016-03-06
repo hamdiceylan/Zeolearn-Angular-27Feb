@@ -1,77 +1,31 @@
 angular.module('app.controllers',[])
 
-.controller('HomeCtrl',function($scope,$rootScope,cardService){
+.controller('HomeCtrl',function($scope,$rootScope,$http,cardService,cardFactory){
   $scope.name = "My Name";
-
-  $rootScope.mainProducts = [
-        {
-            id : '1',
-            image : 'img/product-1.jpg',
-            name : 'Samsung Galaxy s5',
-            oldPrice : '1000',
-            newPrice : '700',
-            currency : '$'
-        },
-        {
-            id : '2',
-            image : 'img/product-2.jpg',
-            name : 'Nokia Lumia 1320',
-            oldPrice : '1200',
-            newPrice : '950',
-            currency : '$'
-        },
-        {
-            id : '3',
-            image : 'img/product-3.jpg',
-            name : 'LG Leon 2015',
-            oldPrice : '700',
-            newPrice : '500',
-            currency : '$'
-        },
-        {
-            id : '4',
-            image : 'img/product-4.jpg',
-            name : 'Sony microsoft',
-            oldPrice : '1100',
-            newPrice : '900',
-            currency : '$'
-        },
-        {
-            id : '5',
-            image : 'img/product-5.jpg',
-            name : 'Iphone 6 Plus',
-            oldPrice : '1400',
-            newPrice : '1100',
-            currency : '$'
-        },
-        {
-            id : '6',
-            image : 'img/product-1.jpg',
-            name : 'Samsung Galaxy s6',
-            oldPrice : '900',
-            newPrice : '500',
-            currency : '$'
-        },
-        {
-            id : '7',
-            image : 'img/product-2.jpg',
-            name : 'Nokia',
-            oldPrice : '800',
-            newPrice : '700',
-            currency : '$'
-        },
-        {
-            id : '10',
-            image : 'img/product-3.jpg',
-            name : 'LG G3 2015',
-            oldPrice : '1000',
-            newPrice : '700',
-            currency : '$'
-        }
-    ];
     
-  $scope.addToCard = function(product){
-      cardService.addToCard(product);
+ $scope.getProducts = function(){
+       debugger;
+     $http({
+         type : 'GET',
+        url : 'http://localhost:3000/products',
+        headers : { 'Content-Type' : 'application/json' }
+     })
+     .success(function(data){
+         $rootScope.mainProducts = data;
+        console.log(data);
+     })
+     .error(function(err){
+      console.log(err); 
+     });
+};  
+    
+ $scope.getProducts();
+
+    
+ $scope.addToCard = function(product){
+      debugger;
+      //cardService.addToCard(product);
+      cardFactory.addToCard(product);
   };
    
     
@@ -153,13 +107,99 @@ angular.module('app.controllers',[])
     });
 })
 
-.controller('CardCtrl',function($scope,$rootScope,cardService){
+.controller('CardCtrl',function($scope,$rootScope,cardService,cardFactory){
     debugger;
     $scope.cards = $rootScope.cardItems;
     
     $scope.RemoveFromCard = function(product){
-        cardService.RemoveFromCard(product);
+        //cardService.RemoveFromCard(product);
+        cardFactory.RemoveFromCard(product);
     };
     
-});
+})
+
+.controller('CheckOutCtrl',function($scope,$rootScope){
+    debugger;
+    
+    $scope.message = "I am in Checkout Page";
+    
+    $scope.form = {
+        name : '',
+        address : '',
+        postCode: '',
+        products : $rootScope.cardItems
+    }
+    
+    $scope.completeShopping = function(){
+            debugger;
+
+        console.log($scope.form);
+    };
+    
+    
+})
+
+.controller('productCrudCtrl',function($scope,$http,$rootScope){
+    
+    $scope.newProduct=   {
+        "id": 0,
+        "image": "img/product-3.jpg",
+        "name": "",
+        "oldPrice": "",
+        "newPrice": "",
+        "currency": "$"
+    };
+
+    $scope.AddProduct = function(){
+        console.log($scope.newProduct);
+        $http({
+            method : 'POST',
+            url : 'http://localhost:3000/products',
+            data : $scope.newProduct,
+            headers : { 'Content-Type' : 'application/json' }
+        })
+        .success(function(data){
+            console.log(data);
+            $scope.getProducts();
+        })
+        .error(function(err){
+            console.log(err);
+        });
+    };
+    
+    $scope.getProducts = function(){
+       debugger;
+     $http({
+         type : 'GET',
+        url : 'http://localhost:3000/products',
+        headers : { 'Content-Type' : 'application/json' }
+     })
+     .success(function(data){
+         $rootScope.mainProducts = data;
+        console.log(data);
+     })
+     .error(function(err){
+      console.log(err); 
+     });
+}; 
+    
+    $scope.DeleteProduct = function(product){
+        debugger;
+        $http({
+            method : 'DELETE',
+            url : 'http://localhost:3000/products/' +product.id,
+            headers : { 'Content-Type' : 'application/json' }
+        })
+        .success(function(data){
+            console.log(data);
+            $scope.getProducts();
+        })
+        .error(function(err){
+            console.log(err);
+        });
+    };
+    
+ $scope.getProducts();
+    
+}); 
 

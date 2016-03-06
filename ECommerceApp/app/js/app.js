@@ -1,5 +1,5 @@
 
-var eCommerceApp = angular.module('eCommerceApp',['ngRoute','app.controllers','app.services','app.directives']);
+var eCommerceApp = angular.module('eCommerceApp',['ngRoute','ngMessages','app.controllers','app.services','app.directives','app.factories','app.filters']);
 
 
 eCommerceApp.config(['$routeProvider',
@@ -23,9 +23,17 @@ eCommerceApp.config(['$routeProvider',
         templateUrl: 'views/category.html',
         controller :  'CategoryCtrl'
       }).
+      when('/checkout', {
+        templateUrl: 'views/checkout.html',
+        controller :  'CheckOutCtrl'
+      }).
       when('/productDetail/:productId', {
         templateUrl: 'views/productDetail.html',
         controller : 'ProductDetailCtrl'
+      }).
+      when('/productCrud', {
+        templateUrl: 'views/product-crud.html',
+        controller : 'productCrudCtrl'
       }).
       otherwise({
         redirectTo: '/home'
