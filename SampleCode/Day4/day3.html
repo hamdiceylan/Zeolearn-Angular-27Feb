@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="main">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script type="text/javascript">
+        var app  = angular.module('main',[]);
+        app.controller('mainCtrl',function($rootScope,$scope,random,date){
+            $scope.hour = date.showDate();    
+            $scope.message = date.showDateMessage();
+        });
+        app.controller('secondCtrl',function($rootScope,$scope){
+            $scope.message = "Welcome2";
+        });
+        app.directive('firstDirective',function(){
+            return{
+                restrict : 'EAC',
+                scope : {
+                    name : '='
+                },
+                templateUrl: '../Day2/directiveView.html',
+                replace: true
+            }
+        });
+        
+        app.service('random',function(){
+           var num = Math.floor(Math.random() * 10);    
+           this.randomNumber = function(){
+               return num;
+           };
+        });
+        app.provider('date',function(){
+           var message;
+           return {
+               setMessage : function(value){
+                   message = value;
+               },
+               $get : function(){
+                   return {
+                       showDate : function (){
+                           var date = new Date();
+                           return date.getHours();
+                       },
+                       showDateMessage : function(){
+                           return message;
+                       }
+                   }
+               }
+           } 
+        });
+        
+        app.config(function(dateProvider){
+            var time = dateProvider.$get().showDate();
+            if(time > 12){
+               dateProvider.setMessage("Good Afternoon");
+            }
+            else if (time < 12){
+                dateProvider.setMessage("Good Morning");
+            }
+            console.log(dateProvider);
+        });
+        
+    </script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body >
+    <div ng-controller="mainCtrl">
+     Time is  {{hour}} and my message is {{message}} 
+        
+    </div>
+    
+    <div ng-controller="secondCtrl">
+      
+    </div>
+    
+    
+
+</body>
+</html>
