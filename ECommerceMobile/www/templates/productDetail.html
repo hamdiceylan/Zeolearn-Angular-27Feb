@@ -1,0 +1,19 @@
+<ion-view view-title="Products Details">
+  <ion-content>
+      
+<div class="list card">
+
+  <div class="item item-avatar">
+    <h2>{{selectedProduct.name}}</h2>
+    <p>Old Price : {{selectedProduct.oldPrice}} {{selectedProduct.currency}} was and <br/> its {{selectedProduct.newPrice}} {{selectedProduct.currency}} now.</p>
+  </div>
+
+  <div class="item item-image">
+    <img ng-src="{{selectedProduct.image}}">
+  </div>
+
+ 
+
+</div>
+    </ion-content>
+</ion-view>

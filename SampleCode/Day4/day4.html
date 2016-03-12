@@ -8,9 +8,45 @@
             $scope.hour = date.showDate();    
             $scope.message = date.showDateMessage();
         });
-        app.controller('secondCtrl',function($rootScope,$scope){
-            $scope.message = "Welcome2";
-        });
+   
+        app.controller('promiseCtrl',function($scope,$q){
+            
+            $scope.value = 0;
+            $scope.step = 0;
+
+            
+            $scope.addOne = function(num){
+                var q = $q.defer();
+                $scope.step++;
+                if(angular.isNumber(num)){
+                    setTimeout(function(){
+                        q.resolve(num + 1);
+                    },1000);
+                    
+                } else{
+                    q.reject('error for operation');
+                }
+                return q.promise;
+            }
+            
+            $scope.promise = $scope.addOne($scope.value);
+            
+            $scope.promise
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne("test");})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(function(success){ return $scope.addOne(success);})
+                .then(
+                    function(success){ $scope.value = success; },
+                    function(error){  $scope.value = error;}
+                );
+            
+            
+        })
         app.directive('firstDirective',function(){
             return{
                 restrict : 'EAC',
@@ -64,16 +100,10 @@
     <title></title>
 </head>
 <body >
-    <div ng-controller="mainCtrl">
-     Time is  {{hour}} and my message is {{message}} 
-        
+    <div ng-controller="promiseCtrl">
+        {{value}}
+        <br>
+        {{step}}
     </div>
-    
-    <div ng-controller="secondCtrl">
-      
-    </div>
-    
-    
-
 </body>
 </html>

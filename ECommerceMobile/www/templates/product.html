@@ -1,0 +1,17 @@
+<ion-view view-title="Products">
+  <ion-content>
+      
+<div class="list">
+
+    <a class="item item-thumbnail-left" href="#/app/productDetail/{{product.id}}" ng-repeat="product in mainProducts">
+      <img ng-src="{{product.image}}" alt="">
+      <h2>{{product.name}}</h2>
+      <p>Old Price : {{product.oldPrice}} {{product.currency}} was and <br/> its {{product.newPrice}} {{product.currency}} now.</p>
+    </a>
+    
+    
+
+    ...
+
+</div>  </ion-content>
+</ion-view>
